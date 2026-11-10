@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<!--
+=====================================================================
+ PRIME FASHION BOUTIQUE – index.html (single file, no installs needed)
+
+ ✅ WhatsApp: 237671068357   ✅ Phone: +237 671 068 357
+ 🖼️ Photos load automatically from free Unsplash image links.
+    Each photo slot has  data-img="..."  (Unsplash photo IDs).
+    To use YOUR OWN photo later, change  --img:none  to
+    --img:url('images/yourphoto.jpg')  and remove data-img.
+=====================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime Fashion Boutique | Fashion in Douala, Cameroon</title>
+<meta name="description" content="Prime Fashion Boutique in Douala: premium men’s and women’s clothing, shoes, bags and accessories.">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='black'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='%23c9a24b' font-family='serif'>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0b; --ink:#161616; --white:#fff; --cream:#f7f3ec;
+  --gold:#c9a24b; --gold-2:#e6c982; --muted:#8a8a8a;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,92%);margin:auto}
+section{padding:90px 0}
+.eyebrow{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h2.title{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:500;line-height:1.2;margin:10px 0 14px}
+.lead{color:#555;max-width:560px}
+.center{text-align:center}.center .lead{margin:auto}
+.line{width:60px;height:2px;background:var(--gold);margin:18px 0 0}.center .line{margin:18px auto 0}
+
+/* Buttons */
+.btn{display:inline-block;padding:14px 32px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;border:1px solid var(--gold);transition:.3s;cursor:pointer;font-family:var(--sans);background:none}
+.btn-gold{background:var(--gold);color:var(--black)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-line{color:var(--white)}
+.btn-line:hover{background:var(--gold);color:var(--black)}
+
+/* Image placeholders */
+.ph{position:relative;background-color:#222;background-image:var(--img,none),linear-gradient(135deg,#1c1c1c,#3a3220 60%,#c9a24b44);background-size:cover;background-position:center;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.ph::after{content:"📷 " attr(data-label);display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:86%;text-align:center;font-size:.72rem;letter-spacing:.08em;color:#e6c982cc;border:1px dashed #c9a24b88;padding:10px 6px;pointer-events:none}
+.ph[style*="url("]::after,.ph.has-img::after{display:none}
+.ph.noimg::after{display:block}
+.ph{opacity:1}
+
+/* Header */
+header{position:fixed;inset:0 0 auto 0;z-index:100;transition:.4s;padding:18px 0}
+header.scrolled{background:rgba(11,11,11,.96);padding:12px 0;box-shadow:0 2px 20px #0008;backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);color:var(--white);font-size:1.3rem;letter-spacing:.12em;font-weight:600}
+.logo span{color:var(--gold)}
+.menu{display:flex;gap:30px;list-style:none;align-items:center}
+.menu a{color:var(--white);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;position:relative;padding:4px 0}
+.menu a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold);transition:.3s}
+.menu a:hover::after,.menu a.active::after{width:100%}
+.menu a:hover,.menu a.active{color:var(--gold-2)}
+.burger{display:none;background:none;border:0;width:34px;height:26px;position:relative;cursor:pointer;z-index:120}
+.burger span{position:absolute;left:0;width:100%;height:2px;background:var(--white);transition:.3s}
+.burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:12px}.burger span:nth-child(3){top:22px}
+.burger.open span:nth-child(1){top:12px;transform:rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){top:12px;transform:rotate(-45deg)}
+
+/* Hero */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:var(--white);position:relative;padding:120px 0 80px;background:radial-gradient(circle at 75% 30%,#3a3220 0%,#0b0b0b 65%)}
+.hero .ph{position:absolute;inset:0;z-index:0;opacity:.55}
+.hero .ph::after{top:auto;bottom:90px;transform:translateX(-50%);width:auto;padding:8px 14px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b0b0bee 20%,#0b0b0b66);z-index:1}
+.hero .container{position:relative;z-index:2}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,8vw,5.4rem);font-weight:500;line-height:1.08;margin:18px 0 22px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{max-width:480px;color:#d6d6d6;margin-bottom:34px}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.scroll-hint::after{content:"";display:block;width:1px;height:36px;background:var(--gold);margin:8px auto 0;animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Marquee strip */
+.strip{background:var(--gold);color:var(--black);padding:14px 0;overflow:hidden;white-space:nowrap}
+.strip div{display:inline-block;animation:slide 25s linear infinite;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about .ph{aspect-ratio:4/5;box-shadow:20px 20px 0 -2px var(--gold)}
+.stats{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
+.stats b{font-family:var(--serif);font-size:2rem;color:var(--gold);display:block;line-height:1.1}
+.stats small{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#777}
+.about p+p{margin-top:14px;color:#555}
+
+/* Categories */
+.cats{background:var(--cream)}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
+.cat{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;display:block}
+.cat .ph{position:absolute;inset:0;transition:transform .7s}
+.cat:hover .ph{transform:scale(1.08)}
+.cat::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,#000d);z-index:2}
+.cat .info{position:absolute;left:22px;right:22px;bottom:22px;z-index:3;color:var(--white)}
+.cat h3{font-family:var(--serif);font-weight:500;font-size:1.5rem}
+.cat span{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-2)}
+
+/* Products */
+.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:34px 0 40px}
+.filters button{padding:9px 22px;border:1px solid #ddd;background:none;font:500 .72rem var(--sans);letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s}
+.filters button.on,.filters button:hover{background:var(--black);color:var(--gold-2);border-color:var(--black)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.prod{transition:.4s}
+.prod.hide{display:none}
+.prod .ph{aspect-ratio:3/4}
+.prod .tag{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--black);font-size:.62rem;letter-spacing:.15em;padding:4px 10px;font-weight:600;z-index:2;text-transform:uppercase}
+.prod h3{font-family:var(--serif);font-weight:500;font-size:1.12rem;margin-top:14px}
+.prod small{color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.price{color:#9a7a2a;font-weight:600;margin:4px 0 12px}
+.order{display:block;text-align:center;padding:11px;background:var(--black);color:var(--gold-2);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:.3s}
+.order:hover{background:var(--gold);color:var(--black)}
+
+/* Banner */
+.banner{background:var(--black);color:var(--white);text-align:center;background-image:radial-gradient(circle at 50% 0,#3a3220,#0b0b0b 70%)}
+.banner h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,4.5vw,3rem);max-width:720px;margin:12px auto 28px}
+.banner h2 em{color:var(--gold)}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px;margin-top:50px}
+.gal .ph{transition:.5s}
+.gal .ph:hover{transform:scale(1.03);z-index:2;box-shadow:0 14px 40px #0006}
+.gal .tall{grid-row:span 2}.gal .wide{grid-column:span 2}
+
+/* Why us */
+.why{background:var(--cream)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:46px}
+.why-grid div{text-align:center;padding:30px 18px;background:var(--white);border-bottom:3px solid var(--gold)}
+.why-grid i{font-style:normal;font-size:1.8rem;display:block;margin-bottom:8px}
+.why-grid h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:6px}
+.why-grid p{font-size:.85rem;color:#666}
+
+/* Contact */
+.contact{background:var(--black);color:var(--white)}
+.contact .lead{color:#bbb}
+.c-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;margin-top:46px}
+.c-item{display:flex;gap:16px;margin-bottom:26px}
+.c-item .ic{width:46px;height:46px;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);flex:none;font-size:1.1rem}
+.c-item h4{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+.c-item p,.c-item a{color:#ddd;font-size:.95rem}
+.placeholder-note{display:inline-block;background:#c9a24b22;border:1px dashed var(--gold);color:var(--gold-2);font-size:.68rem;padding:1px 8px;margin-left:6px;letter-spacing:.08em}
+.map{min-height:340px;background:linear-gradient(135deg,#1c1c1c,#2b2517);border:1px solid #c9a24b55;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;gap:14px}
+.map .pin{font-size:3rem}
+.map h3{font-family:var(--serif);font-weight:500;font-size:1.5rem}
+.map p{color:#aaa;font-size:.9rem}
+.hours{margin-top:6px}
+.hours li{list-style:none;display:flex;justify-content:space-between;max-width:320px;border-bottom:1px solid #ffffff18;padding:6px 0;font-size:.9rem;color:#ccc}
+
+/* Footer */
+footer{background:#000;color:#999;padding:60px 0 24px;border-top:1px solid #c9a24b44}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:36px}
+footer h5{color:var(--white);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px}
+footer li{list-style:none;margin-bottom:8px;font-size:.88rem}
+footer a:hover{color:var(--gold-2)}
+footer p{font-size:.88rem}
+.social{display:flex;gap:10px;margin-top:16px}
+.social a{width:38px;height:38px;border:1px solid #444;display:grid;place-items:center;font-size:.8rem;transition:.3s;color:#ccc}
+.social a:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.copy{border-top:1px solid #222;margin-top:40px;padding-top:20px;text-align:center;font-size:.75rem;letter-spacing:.08em}
+
+/* Floating WhatsApp + top */
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 24px #0007;animation:pulse 2.2s infinite}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #25d36699,0 6px 24px #0007}70%{box-shadow:0 0 0 18px #25d36600,0 6px 24px #0007}100%{box-shadow:0 0 0 0 #25d36600,0 6px 24px #0007}}
+.totop{position:fixed;right:26px;bottom:90px;z-index:89;width:44px;height:44px;background:var(--black);color:var(--gold);border:1px solid var(--gold);cursor:pointer;opacity:0;pointer-events:none;transition:.3s;font-size:1.1rem}
+.totop.show{opacity:1;pointer-events:auto}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* Tablet */
+@media(max-width:1000px){
+  .cat-grid,.prod-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
+  .gal{grid-template-columns:repeat(3,1fr)}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .c-grid{grid-template-columns:1fr}
+}
+/* Mobile */
+@media(max-width:760px){
+  section{padding:64px 0}
+  .burger{display:block}
+  .menu{position:fixed;inset:0;background:var(--black);flex-direction:column;justify-content:center;gap:28px;transform:translateX(100%);transition:.45s;z-index:110}
+  .menu.open{transform:none}
+  .menu a{font-size:1rem}
+  .about{grid-template-columns:1fr;gap:44px}
+  .about .ph{box-shadow:12px 12px 0 -2px var(--gold);margin-right:12px}
+  .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+  .gal .wide{grid-column:span 2}
+  .hero{text-align:center}
+  .hero p{margin-inline:auto}
+  .hero .btns{justify-content:center}
+  .hero::before{background:#0b0b0bcc}
+}
+@media(max-width:480px){
+  .cat-grid{gap:12px}.prod-grid{gap:14px}
+  .cat h3{font-size:1.1rem}.cat .info{left:12px;bottom:12px}
+  .prod h3{font-size:.98rem}
+  .order{font-size:.6rem;padding:10px 4px}
+  .f-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / NAVIGATION ============ -->
+<header id="header">
+  <div class="container nav">
+    <a href="#home" class="logo">PRIME<span>.</span> FASHION</a>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#categories">Collections</a></li>
+      <li><a href="#products">Featured</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" class="btn btn-gold wa-link" style="padding:10px 22px;color:#0b0b0b">Order</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <!-- 🖼️ HERO IMAGE: fashion photo (auto-loaded). Replace later with your own if you wish. -->
+  <div class="ph" data-label="HERO IMAGE" data-img="1490481651871-ab68de25d43d 1483985988355-763728e1935b 1441986300917-64674bd600d8" data-kw="fashion,boutique" data-w="1600" data-lock="1" style="--img:none"></div>
+  <div class="container">
+    <div class="eyebrow">Douala · Cameroon</div>
+    <h1>Dress the way<br>you want to be <em>remembered.</em></h1>
+    <p>Prime Fashion Boutique brings you refined men’s and women’s clothing, shoes, bags and accessories, curated for style, confidence and class.</p>
+    <div class="btns">
+      <a href="#products" class="btn btn-gold">Shop Featured</a>
+      <a href="#" class="btn btn-line wa-link">Order on WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<div class="strip"><div>
+  ✦ New arrivals every week ✦ Order easily on WhatsApp ✦ Delivery in Douala ✦ Premium quality ✦ Men · Women · Shoes · Bags ✦
+  ✦ New arrivals every week ✦ Order easily on WhatsApp ✦ Delivery in Douala ✦ Premium quality ✦ Men · Women · Shoes · Bags ✦
+</div></div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container about">
+    <div class="reveal">
+      <!-- 🖼️ ABOUT IMAGE (store or owner photo) -->
+      <div class="ph" data-label="ABOUT IMAGE" data-img="1441986300917-64674bd600d8 1441984904996-e0b6ba687e04 1558769132-cb1aea458c5e" data-kw="clothing,store" data-w="900" data-lock="2" style="--img:none"></div>
+    </div>
+    <div class="reveal d1">
+      <div class="eyebrow">About Us</div>
+      <h2 class="title">Where elegance meets everyday confidence</h2>
+      <div class="line"></div>
+      <p style="margin-top:22px">Prime Fashion Boutique is a Douala fashion house created for people who believe that great style is a form of self-respect. From sharp tailored pieces to statement shoes and finishing accessories, every item is chosen for quality, fit and lasting elegance.</p>
+      <p>Whether you are dressing for the office, a wedding, a night out or simply the everyday, our team is here to help you look and feel your best.</p>
+      <div class="stats">
+        <div><b data-count="5000">0</b><small>Happy clients</small></div>
+        <div><b data-count="1200">0</b><small>Styles in store</small></div>
+        <div><b data-count="8">0</b><small>Years of style</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="cats" id="categories">
+  <div class="container center">
+    <div class="eyebrow reveal">Collections</div>
+    <h2 class="title reveal">Shop by Category</h2>
+    <p class="lead reveal">Everything you need for a complete, polished look, all in one boutique.</p>
+    <div class="line"></div>
+    <div class="cat-grid">
+      <a class="cat reveal" data-filter="men" href="#products">
+        <div class="ph" data-label="MEN’S IMAGE" data-img="1507679799987-c73779587ccf 1594938298603-c8148c4dae35 1617137968427-85924c800a22" data-kw="man,suit" data-w="800" data-lock="3" style="--img:none"></div>
+        <div class="info"><h3>Men’s Clothing</h3><span>Explore →</span></div>
+      </a>
+      <a class="cat reveal d1" data-filter="women" href="#products">
+        <div class="ph" data-label="WOMEN’S IMAGE" data-img="1469334031218-e382a71b716b 1515886657613-9f3515b0c78f 1539109136881-3be0616acf4b" data-kw="woman,fashion" data-w="800" data-lock="4" style="--img:none"></div>
+        <div class="info"><h3>Women’s Clothing</h3><span>Explore →</span></div>
+      </a>
+      <a class="cat reveal d2" data-filter="shoes" href="#products">
+        <div class="ph" data-label="SHOES IMAGE" data-img="1542291026-7eec264c27ff 1549298916-b41d501d3772 1560769629-975ec94e6a86" data-kw="shoes,sneakers" data-w="800" data-lock="5" style="--img:none"></div>
+        <div class="info"><h3>Shoes</h3><span>Explore →</span></div>
+      </a>
+      <a class="cat reveal d3" data-filter="bags" href="#products">
+        <div class="ph" data-label="BAGS &amp; ACCESSORIES IMAGE" data-img="1584917865442-de89df76afd3 1548036328-c9fa89d128fa 1566150905458-1bf1fc113f0d" data-kw="handbag,bag" data-w="800" data-lock="6" style="--img:none"></div>
+        <div class="info"><h3>Bags &amp; Accessories</h3><span>Explore →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PRODUCTS ============ -->
+<section id="products">
+  <div class="container center">
+    <div class="eyebrow reveal">Best Sellers</div>
+    <h2 class="title reveal">Featured Products</h2>
+    <p class="lead reveal">Sample items and prices. Tap “Order” to message us instantly on WhatsApp.</p>
+    <div class="line"></div>
+    <div class="filters reveal">
+      <button class="on" data-f="all">All</button>
+      <button data-f="men">Men</button>
+      <button data-f="women">Women</button>
+      <button data-f="shoes">Shoes</button>
+      <button data-f="bags">Bags &amp; Acc.</button>
+    </div>
+    <div class="prod-grid" style="text-align:left">
+      <article class="prod reveal" data-cat="men">
+        <div class="ph" data-label="PRODUCT 1" data-img="1617137968427-85924c800a22 1594938298603-c8148c4dae35 1507679799987-c73779587ccf" data-kw="suit,man" data-w="700" data-lock="7" style="--img:none"><span class="tag">New</span></div>
+        <h3>Classic Tailored Suit</h3><small>Men’s Clothing</small>
+        <div class="price">85,000 FCFA</div>
+        <a href="#" class="order" data-item="Classic Tailored Suit" data-price="85,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d1" data-cat="women">
+        <div class="ph" data-label="PRODUCT 2" data-img="1515886657613-9f3515b0c78f 1539109136881-3be0616acf4b 1469334031218-e382a71b716b" data-kw="dress,woman" data-w="700" data-lock="8" style="--img:none"><span class="tag">Best seller</span></div>
+        <h3>Elegant Evening Dress</h3><small>Women’s Clothing</small>
+        <div class="price">45,000 FCFA</div>
+        <a href="#" class="order" data-item="Elegant Evening Dress" data-price="45,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d2" data-cat="shoes">
+        <div class="ph" data-label="PRODUCT 3" data-img="1614252235316-8c857d38b5f4 1560769629-975ec94e6a86 1549298916-b41d501d3772" data-kw="leather,shoes" data-w="700" data-lock="9" style="--img:none"></div>
+        <h3>Leather Oxford Shoes</h3><small>Shoes</small>
+        <div class="price">38,000 FCFA</div>
+        <a href="#" class="order" data-item="Leather Oxford Shoes" data-price="38,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d3" data-cat="bags">
+        <div class="ph" data-label="PRODUCT 4" data-img="1590874103328-eac38a683ce7 1566150905458-1bf1fc113f0d 1584917865442-de89df76afd3" data-kw="handbag,leather" data-w="700" data-lock="10" style="--img:none"><span class="tag">New</span></div>
+        <h3>Luxury Leather Handbag</h3><small>Bags</small>
+        <div class="price">52,000 FCFA</div>
+        <a href="#" class="order" data-item="Luxury Leather Handbag" data-price="52,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal" data-cat="men">
+        <div class="ph" data-label="PRODUCT 5" data-img="1489987707025-afc232f7ea0f 1556905055-8f358a7a47b2 1523381210434-271e8be1f52b" data-kw="shirt,men" data-w="700" data-lock="11" style="--img:none"></div>
+        <h3>Premium Cotton Shirt</h3><small>Men’s Clothing</small>
+        <div class="price">18,500 FCFA</div>
+        <a href="#" class="order" data-item="Premium Cotton Shirt" data-price="18,500 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d1" data-cat="women">
+        <div class="ph" data-label="PRODUCT 6" data-img="1509631179647-0177331693ae 1572804013309-59a88b7e92f1 1483985988355-763728e1935b" data-kw="woman,outfit" data-w="700" data-lock="12" style="--img:none"></div>
+        <h3>Chic Two-Piece Set</h3><small>Women’s Clothing</small>
+        <div class="price">32,000 FCFA</div>
+        <a href="#" class="order" data-item="Chic Two-Piece Set" data-price="32,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d2" data-cat="shoes">
+        <div class="ph" data-label="PRODUCT 7" data-img="1543163521-1bf539c55dd2 1560769629-975ec94e6a86 1549298916-b41d501d3772" data-kw="heels,shoes" data-w="700" data-lock="13" style="--img:none"><span class="tag">Best seller</span></div>
+        <h3>Designer Heels</h3><small>Shoes</small>
+        <div class="price">28,000 FCFA</div>
+        <a href="#" class="order" data-item="Designer Heels" data-price="28,000 FCFA">Order on WhatsApp</a>
+      </article>
+      <article class="prod reveal d3" data-cat="bags">
+        <div class="ph" data-label="PRODUCT 8" data-img="1523275335684-37898b6baf30 1524592094714-0f0654e20314 1548036328-c9fa89d128fa" data-kw="watch,accessories" data-w="700" data-lock="14" style="--img:none"></div>
+        <h3>Gold-Tone Watch &amp; Belt Set</h3><small>Accessories</small>
+        <div class="price">24,000 FCFA</div>
+        <a href="#" class="order" data-item="Gold-Tone Watch & Belt Set" data-price="24,000 FCFA">Order on WhatsApp</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANNER ============ -->
+<section class="banner">
+  <div class="container reveal">
+    <div class="eyebrow">Personal Styling</div>
+    <h2>Need help choosing? Let us style <em>you</em>.</h2>
+    <a href="#" class="btn btn-gold wa-link">Chat with a Stylist</a>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="container center">
+    <div class="eyebrow reveal">Lookbook</div>
+    <h2 class="title reveal">Our Gallery</h2>
+    <p class="lead reveal">A glimpse of our boutique, our collections and our happy clients.</p>
+    <div class="line"></div>
+    <div class="gal">
+      <!-- 🖼️ GALLERY IMAGES: fashion photos (auto-loaded). -->
+      <div class="ph tall reveal" data-label="GALLERY 1" data-img="1539109136881-3be0616acf4b 1515886657613-9f3515b0c78f" data-kw="fashion,model" data-w="800" data-lock="15" style="--img:none"></div>
+      <div class="ph reveal d1" data-label="GALLERY 2" data-img="1441984904996-e0b6ba687e04 1441986300917-64674bd600d8" data-kw="clothing,shop" data-w="800" data-lock="16" style="--img:none"></div>
+      <div class="ph wide reveal d2" data-label="GALLERY 3" data-img="1483985988355-763728e1935b 1490481651871-ab68de25d43d" data-kw="women,shopping" data-w="900" data-lock="17" style="--img:none"></div>
+      <div class="ph reveal" data-label="GALLERY 4" data-img="1523381210434-271e8be1f52b 1489987707025-afc232f7ea0f" data-kw="clothes,rack" data-w="800" data-lock="18" style="--img:none"></div>
+      <div class="ph tall reveal d1" data-label="GALLERY 5" data-img="1507679799987-c73779587ccf 1594938298603-c8148c4dae35" data-kw="man,fashion" data-w="800" data-lock="19" style="--img:none"></div>
+      <div class="ph reveal d2" data-label="GALLERY 6" data-img="1584917865442-de89df76afd3 1548036328-c9fa89d128fa" data-kw="handbag,fashion" data-w="800" data-lock="20" style="--img:none"></div>
+      <div class="ph wide reveal" data-label="GALLERY 7" data-img="1469334031218-e382a71b716b 1509631179647-0177331693ae" data-kw="woman,dress" data-w="900" data-lock="21" style="--img:none"></div>
+      <div class="ph reveal d1" data-label="GALLERY 8" data-img="1542291026-7eec264c27ff 1543163521-1bf539c55dd2" data-kw="shoes,fashion" data-w="800" data-lock="22" style="--img:none"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="why">
+  <div class="container center">
+    <div class="eyebrow reveal">Why Prime</div>
+    <h2 class="title reveal">The Prime Difference</h2>
+    <div class="line"></div>
+    <div class="why-grid">
+      <div class="reveal"><i>✨</i><h4>Premium Quality</h4><p>Carefully selected fabrics and finishes that last.</p></div>
+      <div class="reveal d1"><i>💬</i><h4>Easy WhatsApp Orders</h4><p>Choose, chat and confirm in minutes.</p></div>
+      <div class="reveal d2"><i>🚚</i><h4>Fast Delivery</h4><p>Quick delivery across Douala.</p></div>
+      <div class="reveal d3"><i>👗</i><h4>Personal Styling</h4><p>Friendly advice to find your perfect look.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="center">
+      <div class="eyebrow reveal">Get in Touch</div>
+      <h2 class="title reveal">Visit or Contact Us</h2>
+      <p class="lead reveal">We’d love to help you find your next favourite outfit.</p>
+      <div class="line"></div>
+    </div>
+    <div class="c-grid">
+      <div class="reveal">
+        <div class="c-item"><div class="ic">📍</div><div><h4>Address</h4><p>Akwa, Douala, Cameroon<span class="placeholder-note">replace with real address</span></p></div></div>
+        <div class="c-item"><div class="ic">📞</div><div><h4>Phone</h4><p><a href="tel:+237671068357" id="phoneLink">+237 671 068 357</a></p></div></div>
+        <div class="c-item"><div class="ic">💬</div><div><h4>WhatsApp</h4><p><a href="#" class="wa-link">Message us on WhatsApp</a></p></div></div>
+        <div class="c-item"><div class="ic">✉️</div><div><h4>Email</h4><p><a href="mailto:info@primefashion.example">info@primefashion.example</a><span class="placeholder-note">placeholder</span></p></div></div>
+        <h4 style="font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Opening Hours</h4>
+        <ul class="hours">
+          <li><span>Monday – Saturday</span><span>9:00 – 20:00</span></li>
+          <li><span>Sunday</span><span>12:00 – 18:00</span></li>
+        </ul>
+      </div>
+      <div class="map reveal d1">
+        <div class="pin">📍</div>
+        <h3>Prime Fashion Boutique</h3>
+        <p>Douala, Cameroon</p>
+        <a class="btn btn-gold" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Douala+Cameroon">Open in Google Maps</a>
+        <a class="btn btn-line wa-link" href="#">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <a href="#home" class="logo">PRIME<span>.</span> FASHION</a>
+        <p style="margin-top:14px;max-width:290px">Premium fashion for men and women in Douala. Style that speaks before you do.</p>
+        <div class="social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="TikTok">tt</a>
+        </div>
+      </div>
+      <div><h5>Explore</h5><ul>
+        <li><a href="#about">About Us</a></li><li><a href="#categories">Collections</a></li>
+        <li><a href="#products">Featured</a></li><li><a href="#gallery">Gallery</a></li></ul></div>
+      <div><h5>Shop</h5><ul>
+        <li><a href="#products" data-filter="men">Men’s Clothing</a></li><li><a href="#products" data-filter="women">Women’s Clothing</a></li>
+        <li><a href="#products" data-filter="shoes">Shoes</a></li><li><a href="#products" data-filter="bags">Bags &amp; Accessories</a></li></ul></div>
+      <div><h5>Contact</h5><ul>
+        <li>Douala, Cameroon</li><li><a href="tel:+237671068357">+237 671 068 357</a></li>
+        <li><a href="#" class="wa-link">WhatsApp us</a></li></ul></div>
+    </div>
+    <div class="copy">© <span id="year"></span> Prime Fashion Boutique. All rights reserved. · Douala, Cameroon</div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp + back to top -->
+<a href="#" class="wa-float wa-link" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07s.88 2.4 1 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<script>
+/* =====================================================================
+   WHATSAPP NUMBER (country code + number, no "+", no spaces)
+   ===================================================================== */
+const WA_NUMBER = "237671068357";
+const WA_DEFAULT_MSG = "Hello Prime Fashion Boutique, I would like to place an order / get more information.";
+
+const waURL = msg => "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+
+// General WhatsApp buttons
+document.querySelectorAll(".wa-link").forEach(a=>{
+  a.href = waURL(WA_DEFAULT_MSG);
+  a.target = "_blank"; a.rel = "noopener";
+});
+// Product order buttons
+document.querySelectorAll(".order").forEach(a=>{
+  const msg = "Hello Prime Fashion Boutique, I would like to order: " + a.dataset.item + " (" + a.dataset.price + "). Is it available?";
+  a.href = waURL(msg); a.target="_blank"; a.rel="noopener";
+});
+
+// Header scroll effect + back-to-top
+const header = document.getElementById("header"), totop = document.getElementById("totop");
+addEventListener("scroll", ()=>{
+  header.classList.toggle("scrolled", scrollY > 60);
+  totop.classList.toggle("show", scrollY > 600);
+  highlight();
+}, {passive:true});
+totop.onclick = ()=> scrollTo({top:0, behavior:"smooth"});
+
+// Mobile menu
+const burger = document.getElementById("burger"), menu = document.getElementById("menu");
+function toggleMenu(open){
+  burger.classList.toggle("open", open); menu.classList.toggle("open", open);
+  document.body.style.overflow = open ? "hidden" : "";
+}
+burger.onclick = ()=> toggleMenu(!menu.classList.contains("open"));
+menu.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> toggleMenu(false)));
+
+// Active link highlight
+const links = [...menu.querySelectorAll("a[href^='#']")].filter(a=>a.getAttribute("href").length>1);
+function highlight(){
+  let cur = "home";
+  links.forEach(a=>{
+    const s = document.querySelector(a.getAttribute("href"));
+    if(s && s.getBoundingClientRect().top < innerHeight*0.4) cur = a.getAttribute("href").slice(1);
+  });
+  links.forEach(a=> a.classList.toggle("active", a.getAttribute("href")==="#"+cur));
+}
+
+// Scroll reveal
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+// Animated counters
+const co = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count; let n = 0;
+    const step = Math.max(1, Math.ceil(end/60));
+    const t = setInterval(()=>{ n = Math.min(end, n+step); el.textContent = n.toLocaleString("en") + "+"; if(n>=end) clearInterval(t); }, 25);
+    co.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll("[data-count]").forEach(el=>co.observe(el));
+
+// Product filter
+const fbtns = document.querySelectorAll(".filters button");
+function filter(f){
+  fbtns.forEach(b=> b.classList.toggle("on", b.dataset.f===f));
+  document.querySelectorAll(".prod").forEach(p=>{
+    p.classList.toggle("hide", f!=="all" && p.dataset.cat!==f);
+    p.classList.add("in");
+  });
+}
+fbtns.forEach(b=> b.onclick = ()=> filter(b.dataset.f));
+document.querySelectorAll("[data-filter]").forEach(a=>{
+  a.addEventListener("click", ()=> filter(a.dataset.filter));
+});
+
+// ---------- Fashion photo loader (tries each photo link, then a backup source) ----------
+const UNS = id => "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&q=70&w=";
+function loadPh(el){
+  const w = el.dataset.w || 800;
+  const list = el.dataset.img.split(" ").filter(Boolean).map(id => UNS(id) + w);
+  list.push("https://loremflickr.com/" + w + "/" + Math.round(w*1.25) + "/" + el.dataset.kw + "?lock=" + (el.dataset.lock || 1));
+  let done = false;
+  (function next(i){
+    if(done) return;
+    if(i >= list.length){ el.classList.add("noimg"); return; }
+    const im = new Image(); let moved = false;
+    const go = () => { if(!moved && !done){ moved = true; next(i+1); } };
+    const timer = setTimeout(go, 8000);
+    im.onload = () => { clearTimeout(timer); if(done) return; done = true;
+      el.style.setProperty("--img", "url('" + list[i] + "')"); el.classList.add("has-img"); };
+    im.onerror = () => { clearTimeout(timer); go(); };
+    im.src = list[i];
+  })(0);
+}
+const phObs = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ loadPh(e.target); phObs.unobserve(e.target); } });
+},{rootMargin:"400px 0px"});
+document.querySelectorAll(".ph[data-img]").forEach(el=>phObs.observe(el));
+
+// Footer year
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
